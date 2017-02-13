@@ -20,11 +20,11 @@ vnoremap <Plug>(yawiki-mark-question)
     \ :<C-u>call <SID>SurroundWith('??', '??')<CR>
 
 if !get(g:, 'yawiki_disable_formatting', 0)
-    vmap <unique> <buffer> <Leader>mb <Plug>(yawiki-mark-bold)
-    vmap <unique> <buffer> <Leader>mi <Plug>(yawiki-mark-italic)
-    vmap <unique> <buffer> <Leader>mc <Plug>(yawiki-mark-code)
-    vmap <unique> <buffer> <Leader>ms <Plug>(yawiki-mark-strikeout)
-    vmap <unique> <buffer> <Leader>mu <Plug>(yawiki-mark-underline)
-    vmap <unique> <buffer> <Leader>mn <Plug>(yawiki-mark-note)
-    vmap <unique> <buffer> <Leader>mq <Plug>(yawiki-mark-question)
+    vmap <buffer> <Leader>mb <Plug>(yawiki-mark-bold)
+    vmap <buffer> <Leader>mi <Plug>(yawiki-mark-italic)
+    vmap <buffer> <Leader>mc <Plug>(yawiki-mark-code)
+    vmap <buffer> <Leader>ms <Plug>(yawiki-mark-strikeout)
+    vmap <buffer> <Leader>mu <Plug>(yawiki-mark-underline)
+    vmap <buffer> <Leader>mn <Plug>(yawiki-mark-note)
+    vmap <buffer> <Leader>mq <Plug>(yawiki-mark-question)
 endif
