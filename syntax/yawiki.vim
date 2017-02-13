@@ -65,9 +65,17 @@ syntax match yawikiQuoteMore /^>\{3,}.*$/
 
 " Some miscellaneous stuff
 syntax match yawikiSeparator /^\s*-\{4,\}\s*$/
-syntax region yawikiDef matchgroup=yawikiDefMarker start="(?\S\+" end="?)"
+syntax region yawikiDef matchgroup=yawikiDefMarker start="(?[^ )]\+" end="?)"
 syntax region yawikiDef matchgroup=yawikiDefMarker start="(?.\+==" end="?)"
 syntax match yawikiTicket /[A-Z]\+-\d\+/
+
+" List bullets
+"" Asterisk
+syntax match yawikiListBullet /^\s*\*\ze /
+"" Numbers and letters
+syntax match yawikiListBullet /^\s*[0-9a-zA-Z]\.\(+\|#\d\)\?\ze /
+"" Roman numerals
+syntax match yawikiListBullet /^\s*[IVLXivlx]\+\.\ze /
 
 " Actual coloring goes here
 highlight link yawikiH1 Title
@@ -98,6 +106,7 @@ highlight link yawikiDefMarker Underlined
 highlight link yawikiLink Identifier
 highlight link yawikiLinkTitle Underlined
 highlight link yawikiTicket Underlined
+highlight link yawikiListBullet Character
 
 highlight link yawikiQuote1 yawikiQuote
 highlight yawikiQuote2 ctermfg=darkblue guifg=darkblue
