@@ -65,7 +65,7 @@ syntax match yawikiQuoteMore /^>\{3,}.*$/
 
 " Some miscellaneous stuff
 syntax match yawikiSeparator /^\s*-\{4,\}\s*$/
-syntax region yawikiDef matchgroup=yawikiDefMarker start="(?\w\+" end="?)"
+syntax region yawikiDef matchgroup=yawikiDefMarker start="(?\S\+" end="?)"
 syntax region yawikiDef matchgroup=yawikiDefMarker start="(?.\+==" end="?)"
 
 " Actual coloring goes here
