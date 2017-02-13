@@ -49,7 +49,7 @@ syntax region yawikiGrayNote start="!!(\(gr[ea]y\|сер\))" end="!!" oneline
 syntax match yawikiLoginFirstLetter /\<\w/ contained
 syntax match yawikiLogin /\w\+@/ contains=yawikiLoginFirstLetter
 
-syntax match yawikiInlineLogin /\w\+$/
+syntax match yawikiInlineLogin /\w\+/
     \ contains=yawikiLoginFirstLetter contained
 syntax match yawikiLoginInflection /\v(кто|кого|кому|оком):\w+/
     \ contains=yawikiInlineLogin
