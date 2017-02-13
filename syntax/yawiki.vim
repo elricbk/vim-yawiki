@@ -67,6 +67,7 @@ syntax match yawikiQuoteMore /^>\{3,}.*$/
 syntax match yawikiSeparator /^\s*-\{4,\}\s*$/
 syntax region yawikiDef matchgroup=yawikiDefMarker start="(?\S\+" end="?)"
 syntax region yawikiDef matchgroup=yawikiDefMarker start="(?.\+==" end="?)"
+syntax match yawikiTicket /[A-Z]\+-\d\+/
 
 " Actual coloring goes here
 highlight link yawikiH1 Title
@@ -96,6 +97,7 @@ highlight link yawikiDef Ignore
 highlight link yawikiDefMarker Underlined
 highlight link yawikiLink Identifier
 highlight link yawikiLinkTitle Underlined
+highlight link yawikiTicket Underlined
 
 highlight link yawikiQuote1 yawikiQuote
 highlight yawikiQuote2 ctermfg=darkblue guifg=darkblue
@@ -105,8 +107,7 @@ highlight yawikiLoginFirstLetter
     \ ctermfg=red term=bold cterm=bold
     \ guifg=red gui=bold
 highlight yawikiLogin
-    \ ctermfg=darkgray term=bold cterm=bold
-    \ guifg=darkgray gui=bold
+    \ term=bold cterm=bold gui=bold
 highlight yawikiLoginInflection
     \ ctermfg=gray term=bold cterm=bold
     \ guifg=gray gui=bold
