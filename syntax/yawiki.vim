@@ -14,9 +14,9 @@ syntax region yawikiH5 start="\V\^\s\*====="  end="$"
 syntax region yawikiH6 start="\V\^\s\*======" end="$"
 
 " Basic formatting
-syntax region yawikiItalic start="//" end="//" oneline
-syntax region yawikiBold start="\*\*" end="\*\*" oneline
-syntax region yawikiUnderline start="__" end="__" oneline
+syntax region yawikiItalic start="//\ze\S" end="\S\zs//"
+syntax region yawikiBold start="\*\*\ze\S" end="\S\zs\*\*"
+syntax region yawikiUnderline start="__\ze\S" end="\S\zs__"
 
 " Multiline regions of text
 syntax region yawikiCode start="%%" end="%%"
@@ -25,11 +25,11 @@ syntax match yawikiCutOpen /<{/
 syntax match yawikiCutClose /}>/
 
 " Inline regions of text
-syntax region yawikiMonospaced start="##" end="##" oneline
-syntax region yawikiStrikeout start="--" end="--" oneline
-syntax region yawikiSmall start="++" end="++" oneline
-syntax match yawikiLinkTitle / \zs.*\ze))/ contained
-syntax match yawikiLinkTitle / \zs.*\ze]]/ contained
+syntax region yawikiMonospaced start="##\ze\S" end="\S\zs##"
+syntax region yawikiStrikeout start="--\ze\S" end="\S\zs--"
+syntax region yawikiSmall start="++\ze\S" end="\S\zs++"
+syntax match yawikiLinkTitle / \zs[^)]*\ze))/ contained
+syntax match yawikiLinkTitle / \zs[^]]*\ze]]/ contained
 syntax region yawikiLink matchgroup=yawikiDelim start="((" end="))"
     \ contains=yawikiLinkTitle oneline
 syntax region yawikiLink matchgroup=yawikiDelim start="\[\[" end="\]\]"
