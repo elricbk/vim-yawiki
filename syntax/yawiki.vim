@@ -113,8 +113,8 @@ highlight yawikiQuote2 ctermfg=darkblue guifg=darkblue
 highlight link yawikiQuoteMore Comment
 
 highlight yawikiLoginFirstLetter
-    \ ctermfg=red term=bold cterm=bold
-    \ guifg=red gui=bold
+    \ ctermfg=darkred term=bold cterm=bold
+    \ guifg=#cb4b16 gui=bold
 highlight yawikiLogin
     \ term=bold cterm=bold gui=bold
 highlight yawikiLoginInflection
