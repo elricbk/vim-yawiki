@@ -77,6 +77,11 @@ syntax match yawikiListBullet /^\s*[0-9a-zA-Z]\.\(+\|#\d\)\?\ze /
 "" Roman numerals
 syntax match yawikiListBullet /^\s*[IVLXivlx]\+\.\ze /
 
+" Tables
+syntax match yawikiTableOuterBorder /||/
+syntax match yawikiTableInnerBorder /[^|]\zs|\ze[^|]/
+syntax region yawikiTable matchgroup=yawikiDelim start="^#|" end="^|#" transparent
+
 " Actual coloring goes here
 highlight link yawikiH1 Title
 highlight link yawikiH2 yawikiH1
@@ -107,6 +112,8 @@ highlight link yawikiLink Identifier
 highlight link yawikiLinkTitle Underlined
 highlight link yawikiTicket Underlined
 highlight link yawikiListBullet Character
+highlight link yawikiTableOuterBorder Delimiter
+highlight link yawikiTableInnerBorder Identifier
 
 highlight link yawikiQuote1 yawikiQuote
 highlight yawikiQuote2 ctermfg=darkblue guifg=darkblue
