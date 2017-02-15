@@ -120,6 +120,7 @@ highlight link yawikiTicket Underlined
 highlight link yawikiListBullet Character
 highlight link yawikiTableOuterBorder Delimiter
 highlight link yawikiTableInnerBorder Identifier
+highlight link yawikiHtmlEntity Delimiter
 
 highlight link yawikiQuote1 yawikiQuote
 highlight yawikiQuote2 ctermfg=darkblue guifg=darkblue
