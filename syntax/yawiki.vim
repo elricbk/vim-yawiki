@@ -28,6 +28,7 @@ syntax match yawikiCutOpen /<{/
 syntax match yawikiCutClose /}>/
 
 " Inline regions of text
+syntax region yawikiEscaped start=/""/ end=/""/
 syntax region yawikiMonospaced start="##\ze\S" end="\S\zs##"
 syntax region yawikiStrikeout start="--\ze\S" end="\S\zs--"
 syntax region yawikiSmall start="++\ze\S" end="\S\zs++"
