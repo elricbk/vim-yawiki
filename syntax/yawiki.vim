@@ -84,9 +84,11 @@ syntax match yawikiListBullet /^\s*[0-9a-zA-Z]\.\(+\|#\d\)\?\ze /
 syntax match yawikiListBullet /^\s*[IVLXivlx]\+\.\ze /
 
 " Tables
-syntax match yawikiTableOuterBorder /||/
-syntax match yawikiTableInnerBorder /[^|]\zs|\ze[^|]/
-syntax region yawikiTable matchgroup=yawikiDelim start="^#|" end="^|#" transparent
+syntax match yawikiTableInnerBorder /|/
+syntax match yawikiTableOuterBorder /^\s*||/
+syntax match yawikiTableOuterBorder /||\s*$/
+syntax match yawikiDelim /^#|/
+syntax match yawikiDelim /^|#/
 
 " Actual coloring goes here
 highlight link yawikiH1 Title
