@@ -2,6 +2,9 @@ if exists("b:current_syntax")
     finish
 endif
 
+" Sync entire file
+syntax sync fromstart
+
 " Copy-paste from markdown.vim
 syntax match yawikiInlineURL /https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z0-9][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?\S*/
 
