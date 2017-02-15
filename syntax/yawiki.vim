@@ -71,6 +71,8 @@ syntax match yawikiSeparator /^\s*-\{4,\}\s*$/
 syntax region yawikiDef matchgroup=yawikiDefMarker start="(?[^ )]\+" end="?)"
 syntax region yawikiDef matchgroup=yawikiDefMarker start="(?.\+==" end="?)"
 syntax match yawikiTicket /[A-Z]\+-\d\+/
+syntax match yawikiHtmlEntity /&\w\+;/
+syntax match yawikiHtmlEntity /&#\d\+;/
 
 " List bullets
 "" Asterisk
