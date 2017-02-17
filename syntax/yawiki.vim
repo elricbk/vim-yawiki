@@ -31,7 +31,7 @@ syntax match yawikiCutClose /}>/
 syntax region yawikiEscaped start=/""/ end=/""/
 syntax region yawikiMonospaced start="##\ze\S" end="\S\zs##"
 syntax region yawikiStrikeout start="--\ze\S" end="\S\zs--"
-syntax region yawikiSmall start="++\ze\S" end="\S\zs++"
+syntax region yawikiSmall start="\([^cC]\|^\)++\ze\S" end="\S\zs++"
 syntax match yawikiLinkTitle / \zs[^)]*\ze))/ contained
 syntax match yawikiLinkTitle / \zs[^]]*\ze]]/ contained
 syntax region yawikiLink matchgroup=yawikiDelim start="((" end="))"
