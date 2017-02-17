@@ -77,7 +77,7 @@ syntax match yawikiHtmlEntity /&#\d\+;/
 
 " List bullets
 "" Asterisk
-syntax match yawikiListBullet /^\s*\*\ze /
+syntax match yawikiListBullet /^\s*[-*]\ze /
 "" Numbers and letters
 syntax match yawikiListBullet /^\s*[0-9a-zA-Z]\.\(+\|#\d\)\?\ze /
 "" Roman numerals
