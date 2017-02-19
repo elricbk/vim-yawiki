@@ -169,3 +169,23 @@ Then (All lines have expected syntax):
   AssertEqual SyntaxOf('YellowNote'), 'yawikiYellowNote'
   AssertEqual SyntaxOf('GrayNote'), 'yawikiGrayNote'
   AssertEqual SyntaxOf('GreyNote'), 'yawikiGrayNote'
+
+Given (Simple login):
+  abcd@
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (It has correct syntax):
+  AssertEqual SyntaxOf('a'), 'yawikiLoginFirstLetter'
+  AssertEqual SyntaxOf('bcd@'), 'yawikiLogin'
+
+Given (Twitter-style login):
+  @abcd
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (It has correct syntax):
+  AssertEqual SyntaxOf('@'), 'yawikiLoginAt'
+  AssertEqual SyntaxOf('abcd'), 'yawikiReversedLogin'
