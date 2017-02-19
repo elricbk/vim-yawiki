@@ -126,3 +126,23 @@ Then (All link parts have correct syntax):
   AssertEqual SyntaxOf('yahoo\.com'), 'yawikiLink'
   AssertEqual SyntaxOf('ururu'), 'yawikiLinkTitle'
   AssertEqual SyntaxOf(']]'), 'yawikiDelim'
+
+Given (Command syntax on single line):
+  {{test}}
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (Syntax is set to command):
+  AssertEqual SyntaxOf('test'), 'yawikiCommand'
+
+Given (Command syntax on multiple lines):
+  {{
+    test
+  }}
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (Syntax is not set to command):
+  AssertEqual SyntaxOf('test'), ''
