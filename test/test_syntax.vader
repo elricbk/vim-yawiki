@@ -1,0 +1,128 @@
+Given (Basic formatting):
+  **bold**
+  //italic//
+  __underline__
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (All lines have expected syntax):
+  AssertEqual SyntaxAt(1, 1), 'yawikiBold'
+  AssertEqual SyntaxAt(2, 1), 'yawikiItalic'
+  AssertEqual SyntaxAt(3, 1), 'yawikiUnderline'
+
+Given (All level headers):
+  = First level header
+  == Second level header
+  === Third level header
+  ==== Fourth level header
+  ===== Fifth level header
+  ====== Sixth level header
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (All headers have expected syntax):
+  for i in range(1, 6)
+    AssertEqual SyntaxAt(i, 1), 'yawikiH' . i
+  endfor
+
+Given (Multiline code snippet):
+  %%(cpp)
+  int i = 0;
+  %%
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (All lines have expected syntax):
+  for i in range(1, line('$'))
+    AssertEqual SyntaxAt(i, 1), 'yawikiCode'
+  endfor
+
+Given (Multiline raw HTML):
+  <#
+  <a href="test.html">This is a test</a>
+  #>
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (All lines have expected syntax):
+  for i in range(1, line('$'))
+    AssertEqual SyntaxAt(i, 1), 'yawikiHtml'
+  endfor
+
+Given (Cut open/close):
+  <{ Hidden region of text
+  Blah-blah
+  }>
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (All lines have expected syntax):
+  AssertEqual SyntaxAt(1, 1), 'yawikiCutOpen'
+  AssertEqual SyntaxAt(3, 1), 'yawikiCutClose'
+
+Given (More basic formatting):
+  ##Monospaced## font
+  --Strikeout-- text
+  ++Small++ text
+  {{Some command}} with text
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (All lines have expected syntax):
+  AssertEqual SyntaxAt(1, 1), 'yawikiMonospaced'
+  AssertEqual SyntaxAt(1, len(getline(1)) - 1), ''
+  AssertEqual SyntaxAt(2, 1), 'yawikiStrikeout'
+  AssertEqual SyntaxAt(2, len(getline(1)) - 1), ''
+  AssertEqual SyntaxAt(3, 1), 'yawikiSmall'
+  AssertEqual SyntaxAt(3, len(getline(1)) - 1), ''
+
+Given (Example of escaping):
+  g+""""+-4.7
+  g++-4.7
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (No escaped formatting should be present):
+  AssertEqual SyntaxAt(1, len(getline(1)) - 1), ''
+  AssertEqual SyntaxAt(2, len(getline(2)) - 1), 'yawikiSmall'
+
+Given (String containing "C++"):
+  c++-4.7 is cool
+  C++-4.7 is cool
+  g++-4.7 is not so cool
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then ('small' formatting should not be started):
+  AssertEqual SyntaxAt(1, len(getline(1)) - 1), ''
+  AssertEqual SyntaxAt(2, len(getline(2)) - 1), ''
+  AssertEqual SyntaxAt(3, len(getline(3)) - 1), 'yawikiSmall'
+
+Given (Links in different formats):
+  http://ya.ru
+  https://ya.ru
+  ((google.com ololo))
+  [[yahoo.com ururu]]
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (All link parts have correct syntax):
+  AssertEqual SyntaxAt(1, 1), 'yawikiInlineURL'
+  AssertEqual SyntaxAt(2, 1), 'yawikiInlineURL'
+  AssertEqual SyntaxOf('(('), 'yawikiDelim'
+  AssertEqual SyntaxOf('google\.com'), 'yawikiLink'
+  AssertEqual SyntaxOf('ololo'), 'yawikiLinkTitle'
+  AssertEqual SyntaxOf('))'), 'yawikiDelim'
+  AssertEqual SyntaxOf('[['), 'yawikiDelim'
+  AssertEqual SyntaxOf('yahoo\.com'), 'yawikiLink'
+  AssertEqual SyntaxOf('ururu'), 'yawikiLinkTitle'
+  AssertEqual SyntaxOf(']]'), 'yawikiDelim'
