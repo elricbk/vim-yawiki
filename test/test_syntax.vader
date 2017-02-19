@@ -146,3 +146,26 @@ Execute (Set filetype):
 
 Then (Syntax is not set to command):
   AssertEqual SyntaxOf('test'), ''
+
+Given (Question and notes):
+  ??Question??
+  !!Note!!
+  !!(green)GreenNote!!
+  !!(red)RedNote!!
+  !!(blue)BlueNote!!
+  !!(yellow)YellowNote!!
+  !!(gray)GrayNote!!
+  !!(grey)GreyNote!!
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (All lines have expected syntax):
+  AssertEqual SyntaxOf('Question'), 'yawikiQuestion'
+  AssertEqual SyntaxOf('Note'), 'yawikiNote'
+  AssertEqual SyntaxOf('GreenNote'), 'yawikiGreenNote'
+  AssertEqual SyntaxOf('RedNote'), 'yawikiRedNote'
+  AssertEqual SyntaxOf('BlueNote'), 'yawikiBlueNote'
+  AssertEqual SyntaxOf('YellowNote'), 'yawikiYellowNote'
+  AssertEqual SyntaxOf('GrayNote'), 'yawikiGrayNote'
+  AssertEqual SyntaxOf('GreyNote'), 'yawikiGrayNote'
