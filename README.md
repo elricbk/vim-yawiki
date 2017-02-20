@@ -14,6 +14,6 @@
 - [ ] Починить синтакс для separator
 - [ ] Тесты
     - [ ] Тесты синтаксиса на `oneline`
-    - [ ] Тесты на folding
+    - [x] Тесты на folding
     - [ ] Тесты на sections
     - [ ] Тесты на formatting

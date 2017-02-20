@@ -1,0 +1,45 @@
+Given (Headings of different levels):
+  = Top level =
+  Test
+  == Second level
+  Test
+  === Third level ===
+  Test
+  == Another second level
+  Test
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (All lines have expected foldlevel):
+  AssertEqual foldlevel(1), 0
+  AssertEqual foldlevel(2), 0
+  AssertEqual foldlevel(3), 1
+  AssertEqual foldlevel(5), 2
+  AssertEqual foldlevel(6), 2
+  AssertEqual foldlevel(7), 1
+  AssertEqual foldlevel(8), 1
+
+Given (Spoiler outside of any section):
+  <{ Something is hidden here
+    42
+  }>
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (Spoiler have positive foldlevel):
+  AssertEqual foldlevel(1), 1
+  AssertEqual foldlevel(2), 1
+  AssertEqual foldlevel(3), 1
+
+Given (Spoiler inside section):
+  == Spoiler section
+  <{ Spoiler
+  }>
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (Spoiler has greater foldlevel than section):
+  AssertEqual foldlevel(1) + 1, foldlevel(2)
