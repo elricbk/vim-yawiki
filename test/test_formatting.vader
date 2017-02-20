@@ -41,3 +41,16 @@ Expect (Formatted text):
   <[quote]>
   ""escaped""
   ((link))
+
+Given (Multiline block of text):
+  This is a block of text
+  Another line
+  And another
+
+Do (Run formatting on whole paragraph):
+  vip\<Space>mb
+
+Expect (Formatted text):
+  **This is a block of text
+  Another line
+  And another**
