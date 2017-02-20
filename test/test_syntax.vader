@@ -189,3 +189,132 @@ Execute (Set filetype):
 Then (It has correct syntax):
   AssertEqual SyntaxOf('@'), 'yawikiLoginAt'
   AssertEqual SyntaxOf('abcd'), 'yawikiReversedLogin'
+
+Given (Login inflection):
+  кто:abc
+  кого:abc
+  кому:abc
+  оком:abc
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (It has correct syntax):
+  for i in range(1, line('$'))
+    AssertEqual SyntaxAt(i, 1), 'yawikiLoginInflection'
+    AssertEqual SyntaxAt(i, len(getline(i)) - 1), 'yawikiInlineLogin'
+    AssertEqual SyntaxOf(':\zs\w', i), 'yawikiLoginFirstLetter'
+  endfor
+
+Given (Quotes in different formats):
+  <[
+    MultilineQuote
+  ]>
+  >>> Quote3
+  >>  Quote2
+  >   Quote1
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (All items have expected syntax):
+  AssertEqual SyntaxOf('MultilineQuote'), 'yawikiQuote'
+  AssertEqual SyntaxOf('Quote1'), 'yawikiQuote1'
+  AssertEqual SyntaxOf('Quote2'), 'yawikiQuote2'
+  AssertEqual SyntaxOf('Quote3'), 'yawikiQuoteMore'
+
+Given (Multiple lines of dashes):
+    ---
+    ----
+    -------------
+
+Execute (FIXME: Set filetype):
+  set filetype=yawiki
+
+Then (Line with 4 or more dashes has separator syntax):
+  AssertEqual SyntaxAt(1, 1), ''
+  AssertEqual SyntaxAt(2, 1), 'yawikiSeparator'
+  AssertEqual SyntaxAt(3, 1), 'yawikiSeparator'
+
+Given (Definition for term without spaces):
+  (?Термин Определение с пробелами?)
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (All definition parts have expected syntax):
+  AssertEqual SyntaxOf('(?'), 'yawikiDefMarker'
+  AssertEqual SyntaxOf('?)'), 'yawikiDefMarker'
+  AssertEqual SyntaxOf('Термин'), 'yawikiDefMarker'
+  AssertEqual SyntaxOf('Определение'), 'yawikiDef'
+
+Given (Different ticket numbers):
+  TICKET-42
+  notticket1
+  NOTTICKET2-42
+  NOTTICKET3 42
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (Correctly formatted ticket has ticket syntax):
+  AssertEqual SyntaxOf('TICKET'), 'yawikiTicket'
+  AssertEqual SyntaxOf('notticket1'), ''
+  AssertEqual SyntaxOf('NOTTICKET2'), ''
+  AssertEqual SyntaxOf('NOTTICKET3'), ''
+
+Given (HTML entities):
+  &mdash;
+  &#4242;
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (Entities have expected syntax):
+  AssertEqual SyntaxOf('&', 1), 'yawikiHtmlEntity'
+  AssertEqual SyntaxOf('&', 2), 'yawikiHtmlEntity'
+
+# FIXME: could be expanded to separate tests to more precise checks
+Given (Some lists with bullets):
+  * Unordered list
+    * Second level list
+  - Unordered list other format
+  1. Ordered list with numbers
+  A. Ordered list with big letters
+  b. Ordered list with small letters
+  2.#42 Ordered list with overriden number
+  3.+ Collapsed ordered list item
+  XII. Ordered list with roman numerals
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (All list bullets/numbers have list bullet syntax):
+  for i in range(1, line('$'))
+    AssertEqual SyntaxOf('^\s*\zs\S\+', i), 'yawikiListBullet', getline(i)
+  endfor
+
+Given (Table formatting):
+  #|
+  || Table | ##with## | borders ||
+  |#
+
+  #||
+  || **Borderless** | table ||
+  ||#
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (Table borders have expected syntax, formatting is supported):
+  AssertEqual SyntaxOf('^#|'), 'yawikiDelim'
+  AssertEqual SyntaxOf('^|#'), 'yawikiDelim'
+  AssertEqual SyntaxOf('^#||'), 'yawikiDelim'
+  AssertEqual SyntaxOf('^||#'), 'yawikiDelim'
+  AssertEqual SyntaxOf('^\zs||\ze[^#]', 1), 'yawikiTableOuterBorder'
+  AssertEqual SyntaxOf('[^#]\zs||\ze$', 1), 'yawikiTableOuterBorder'
+  AssertEqual SyntaxOf('^\zs||\ze[^#]', 2), 'yawikiTableOuterBorder'
+  AssertEqual SyntaxOf('[^#]\zs||\ze$', 2), 'yawikiTableOuterBorder'
+  AssertEqual SyntaxOf(' \zs|\ze '), 'yawikiTableInnerBorder'
+  AssertEqual SyntaxOf('with'), 'yawikiMonospaced'
+  AssertEqual SyntaxOf('Borderless'), 'yawikiBold'
