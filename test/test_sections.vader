@@ -16,7 +16,7 @@ Execute (Forward section movement moves to next section or end of file):
 
 Execute (Backward section movement moves to previous section or start of file):
   set filetype=yawiki
-  normal G
+  normal! G
   normal [[
   AssertEqual line('.'), 4
   normal [[
