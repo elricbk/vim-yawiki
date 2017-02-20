@@ -1,26 +1,25 @@
 Given (Some section headers):
+  Some prefix
   = Top
   Test
   == Second
   Test
-  == Second again
-  Last line
 
-Execute (Set filetype):
+Execute (Forward section movement moves to next section or end of file):
   set filetype=yawiki
   normal ]]
-
-Then (Forward section movement moves to next section or end of file):
-  AssertEqual line('.'), 3
-
-Do (Move forward):
-  ]]]]
-
-Then (Forward section movement moves to next section or end of file):
+  AssertEqual line('.'), 2
+  normal ]]
+  AssertEqual line('.'), 4
+  normal ]]
   AssertEqual line('.'), 5
 
-Do (Move forward):
-  ]]]]]]
-
-Then (Forward section movement moves to next section or end of file):
-  AssertEqual line('.'), 6
+Execute (Backward section movement moves to previous section or start of file):
+  set filetype=yawiki
+  normal G
+  normal [[
+  AssertEqual line('.'), 4
+  normal [[
+  AssertEqual line('.'), 2
+  normal [[
+  AssertEqual line('.'), 1

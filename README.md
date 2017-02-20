@@ -15,5 +15,5 @@
 - [ ] Тесты
     - [ ] Тесты синтаксиса на `oneline`
     - [x] Тесты на folding
-    - [ ] Тесты на sections
+    - [x] Тесты на sections
     - [ ] Тесты на formatting
