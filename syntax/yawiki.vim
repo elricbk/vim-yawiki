@@ -79,7 +79,7 @@ syntax match yawikiHtmlEntity /&#\d\+;/
 "" Asterisk
 syntax match yawikiListBullet /^\s*[-*]\ze /
 "" Numbers and letters
-syntax match yawikiListBullet /^\s*[0-9a-zA-Z]\.\(+\|#\d\)\?\ze /
+syntax match yawikiListBullet /^\s*[0-9a-zA-Z]\.\(+\|#\d\+\)\?\ze /
 "" Roman numerals
 syntax match yawikiListBullet /^\s*[IVLXivlx]\+\.\ze /
 
