@@ -1,0 +1,23 @@
+Given (Some text):
+  test
+
+Before:
+  Save mapleader
+  Save g:yawiki_disable_formatting
+  unlet! g:yawiki_disable_formatting
+  let g:yawiki_disable_formatting = 1
+
+  silent! vunmap <buffer> <Space>mb
+
+  let mapleader=' '
+  set filetype=yawiki
+
+After:
+  Restore g:yawiki_disable_formatting
+  Restore mapleader
+
+Do (Disable formatting mappings):
+  viw\<Space>mb
+
+Expect (No formatting on text):
+  test
