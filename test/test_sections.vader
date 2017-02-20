@@ -1,0 +1,26 @@
+Given (Some section headers):
+  = Top
+  Test
+  == Second
+  Test
+  == Second again
+  Last line
+
+Execute (Set filetype):
+  set filetype=yawiki
+  normal ]]
+
+Then (Forward section movement moves to next section or end of file):
+  AssertEqual line('.'), 3
+
+Do (Move forward):
+  ]]]]
+
+Then (Forward section movement moves to next section or end of file):
+  AssertEqual line('.'), 5
+
+Do (Move forward):
+  ]]]]]]
+
+Then (Forward section movement moves to next section or end of file):
+  AssertEqual line('.'), 6
