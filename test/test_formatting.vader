@@ -1,0 +1,43 @@
+Given (Some unformatted text):
+  first
+  second
+  third
+  strikeout
+  code
+  underline
+  note
+  quote
+  escaped
+  link
+
+Before (Set mapleader):
+  Save mapleader
+  let mapleader=' '
+  set filetype=yawiki
+
+After (Restore mapleader):
+  Restore mapleader
+
+Do (Run some formatting):
+  viw\<Space>mm j
+  viw\<Space>mb j
+  viw\<Space>mi j
+  viw\<Space>ms j
+  viw\<Space>mc j
+  viw\<Space>mu j
+  viw\<Space>mn j
+  viw\<Space>mq j
+  viw\<Space>me j
+  viw\<Space>ml
+
+Expect (Formatted text):
+  ##first##
+  **second**
+  //third//
+  --strikeout--
+  %%code%%
+  __underline__
+  !!note!!
+  <[quote]>
+  ""escaped""
+  ((link))
