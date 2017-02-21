@@ -1,0 +1,5 @@
+filetype off
+set rtp+=~/.vim/bundle/Vader.vim
+set rtp+=~/.vim/bundle/vim-yawiki
+filetype plugin indent on
+syntax enable
