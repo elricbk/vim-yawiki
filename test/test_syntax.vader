@@ -318,3 +318,54 @@ Then (Table borders have expected syntax, formatting is supported):
   AssertEqual SyntaxOf(' \zs|\ze '), 'yawikiTableInnerBorder'
   AssertEqual SyntaxOf('with'), 'yawikiMonospaced'
   AssertEqual SyntaxOf('Borderless'), 'yawikiBold'
+
+Given (Mutltiline bold text):
+  **this
+  is multiline text**
+  not bold
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (Text has bold syntax):
+  AssertEqual SyntaxAt(1, 1), 'yawikiBold'
+  AssertEqual SyntaxAt(2, 1), 'yawikiBold'
+  AssertEqual SyntaxAt(3, 1), ''
+
+Given (Markup which is not adjacent to text):
+  ** bold**
+  // italic//
+  __ underlined__
+  -- strikeout--
+  ## monospaced##
+  ++ small++
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (No markup syntax is set):
+  AssertEqual SyntaxOf('bold'), ''
+  AssertEqual SyntaxOf('italic'), ''
+  AssertEqual SyntaxOf('underlined'), ''
+  AssertEqual SyntaxOf('strikeout'), ''
+  AssertEqual SyntaxOf('monospaced'), ''
+  AssertEqual SyntaxOf('small'), ''
+
+Given (Oneline markup which is used as multiline):
+  {{TOC
+  }}
+  ??Question
+  ??
+  !!Note
+  !!
+  ((Link
+  ))
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (No markup syntax is set):
+  AssertEqual SyntaxOf('TOC'), ''
+  AssertEqual SyntaxOf('Question'), ''
+  AssertEqual SyntaxOf('Note'), ''
+  AssertEqual SyntaxOf('Link'), ''
