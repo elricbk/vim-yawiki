@@ -1,23 +1,42 @@
 Given (Some text):
   test
 
-Before:
+Execute (Disable formatting mappings and try to format):
   Save mapleader
   Save g:yawiki_disable_formatting
   unlet! g:yawiki_disable_formatting
   let g:yawiki_disable_formatting = 1
 
-  silent! vunmap <buffer> <Space>mb
+  silent! vunmap qmb
+  silent! vunmap <buffer> qmb
 
-  let mapleader=' '
+  let mapleader='q'
   set filetype=yawiki
 
-After:
+  normal viwqmb
+
   Restore g:yawiki_disable_formatting
   Restore mapleader
 
-Do (Disable formatting mappings):
-  viw\<Space>mb
-
 Expect (No formatting on text):
   test
+
+Given (Some text):
+  test
+
+Execute (Enable cyrillic formatting mappings and try to format):
+  Save g:yawiki_cyrillic_prefix
+  unlet! g:yawiki_cyrillic_prefix
+  let g:yawiki_cyrillic_prefix = 'ц'
+
+  silent! vunmap цьи
+  silent! vunmap <buffer> цьи
+
+  set filetype=yawiki
+
+  normal viwцьи
+
+  Restore g:yawiki_cyrillic_prefix
+
+Expect (Formatted text):
+  **test**
