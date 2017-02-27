@@ -245,8 +245,33 @@ Execute (Set filetype):
 Then (All definition parts have expected syntax):
   AssertEqual SyntaxOf('(?'), 'yawikiDefMarker'
   AssertEqual SyntaxOf('?)'), 'yawikiDefMarker'
-  AssertEqual SyntaxOf('Термин'), 'yawikiDefMarker'
+  AssertEqual SyntaxOf('Термин'), 'yawikiDefHead'
   AssertEqual SyntaxOf('Определение'), 'yawikiDef'
+
+Given (Definition for term with spaces):
+  (?Многословный термин==Определение с пробелами?)
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (All definition parts have expected syntax):
+  AssertEqual SyntaxOf('(?'), 'yawikiDefMarker'
+  AssertEqual SyntaxOf('?)'), 'yawikiDefMarker'
+  AssertEqual SyntaxOf('=='), 'yawikiDefMarker'
+  AssertEqual SyntaxOf('термин'), 'yawikiDefHead'
+  AssertEqual SyntaxOf('Определение'), 'yawikiDef'
+
+Given (Multiple definitions on one line):
+  (?Термин Определение?) (?Термин==Определение?)
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (All definition parts have expected syntax):
+  AssertEqual SyntaxOf('Термин', 1), 'yawikiDefHead'
+  AssertEqual SyntaxOf('Определение', 1), 'yawikiDef'
+  AssertEqual SyntaxOf('Термин', 2), 'yawikiDefHead'
+  AssertEqual SyntaxOf('Определение', 2), 'yawikiDef'
 
 Given (Different ticket numbers):
   TICKET-42

@@ -69,8 +69,11 @@ syntax match yawikiQuoteMore /^>\{3,}.*$/
 
 " Some miscellaneous stuff
 syntax match yawikiSeparator /^\s*-\{4,\}\s*$/
-syntax region yawikiDef matchgroup=yawikiDefMarker start="(?[^ )]\+" end="?)"
-syntax region yawikiDef matchgroup=yawikiDefMarker start="(?.\+==" end="?)"
+syntax match yawikiDefHead /\((?\)\@2<=\S\+/ contained
+syntax match yawikiDefHead /[^?]\+\ze==/ contained
+syntax match yawikiDefMarker /==/ contained
+syntax region yawikiDef matchgroup=yawikiDefMarker start="(?" end="?)"
+    \ contains=yawikiDefHead,yawikiDefMarker
 syntax match yawikiTicket /[A-Z]\+-\d\+/
 syntax match yawikiHtmlEntity /&\w\+;/
 syntax match yawikiHtmlEntity /&#\d\+;/
@@ -114,8 +117,8 @@ highlight link yawikiSmall Comment
 highlight link yawikiNote Error
 highlight link yawikiQuestion Todo
 highlight link yawikiSeparator Comment
-highlight link yawikiDef Ignore
-highlight link yawikiDefMarker Underlined
+highlight link yawikiDefMarker Delimiter
+highlight link yawikiDefHead Underlined
 highlight link yawikiLink Identifier
 highlight link yawikiLinkTitle Underlined
 highlight link yawikiTicket Underlined
