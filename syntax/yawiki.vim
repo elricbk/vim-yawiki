@@ -116,7 +116,7 @@ highlight link yawikiStrikeout Comment
 highlight link yawikiSmall Comment
 highlight link yawikiNote Error
 highlight link yawikiQuestion Todo
-highlight link yawikiSeparator Comment
+highlight link yawikiSeparator Delimiter
 highlight link yawikiDefMarker Delimiter
 highlight link yawikiDefHead Underlined
 highlight link yawikiLink Identifier

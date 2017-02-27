@@ -224,17 +224,15 @@ Then (All items have expected syntax):
   AssertEqual SyntaxOf('Quote3'), 'yawikiQuoteMore'
 
 Given (Multiple lines of dashes):
-    ---
     ----
     -------------
 
-Execute (FIXME: Set filetype):
+Execute (Set filetype):
   set filetype=yawiki
 
 Then (Line with 4 or more dashes has separator syntax):
-  AssertEqual SyntaxAt(1, 1), ''
+  AssertEqual SyntaxAt(1, 1), 'yawikiSeparator'
   AssertEqual SyntaxAt(2, 1), 'yawikiSeparator'
-  AssertEqual SyntaxAt(3, 1), 'yawikiSeparator'
 
 Given (Definition for term without spaces):
   (?Термин Определение с пробелами?)
