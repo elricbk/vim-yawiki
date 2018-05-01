@@ -1,4 +1,4 @@
-# vim-yawiki ![travis-ci](https://travis-ci.org/elricbk/vim-yawiki.svg?branch=master)
+# vim-yawiki [![Build Status](https://travis-ci.org/elricbk/vim-yawiki.svg?branch=master)](https://travis-ci.org/elricbk/vim-yawiki)
 
 Плагин для работы с Яндексовой вики-разметкой. Поддерживает:
 * Подсветку синтаксиса
