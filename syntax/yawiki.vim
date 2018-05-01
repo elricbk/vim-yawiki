@@ -69,10 +69,10 @@ syntax match yawikiQuoteMore /^>\{3,}.*$/
 
 " Some miscellaneous stuff
 syntax match yawikiSeparator /^\s*-\{4,\}\s*$/
-syntax match yawikiDefHead /\((?\)\@2<=\S\+/ contained
+syntax match yawikiDefHead /\((?\)\@2<=\%([^)]\&\S\)\+/ contained
 syntax match yawikiDefHead /[^?]\+\ze==/ contained
 syntax match yawikiDefMarker /==/ contained
-syntax region yawikiDef matchgroup=yawikiDefMarker start="(?" end="?)"
+syntax region yawikiDef matchgroup=yawikiDefMarker start="(?\ze[^)]" end="?)"
     \ contains=yawikiDefHead,yawikiDefMarker
 syntax match yawikiTicket /[A-Z]\+-\d\+/
 syntax match yawikiHtmlEntity /&\w\+;/

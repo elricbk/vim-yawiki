@@ -306,6 +306,15 @@ Then (All definition parts have expected syntax):
   AssertEqual 'yawikiDefHead', SyntaxOf('Термин', 2)
   AssertEqual 'yawikiDef', SyntaxOf('Определение', 2)
 
+Given (Quesiton mark in brackets):
+  (?)
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (There is no formatting applied):
+  AssertEqual '', SyntaxOf('?')
+
 Given (Different ticket numbers):
   TICKET-42
   notticket1
