@@ -8,18 +8,18 @@ Given (Some section headers):
 Execute (Forward section movement moves to next section or end of file):
   set filetype=yawiki
   normal ]]
-  AssertEqual line('.'), 2
+  AssertEqual 2, line('.')
   normal ]]
-  AssertEqual line('.'), 4
+  AssertEqual 4, line('.')
   normal ]]
-  AssertEqual line('.'), 5
+  AssertEqual 5, line('.')
 
 Execute (Backward section movement moves to previous section or start of file):
   set filetype=yawiki
   normal! G
   normal [[
-  AssertEqual line('.'), 4
+  AssertEqual 4, line('.')
   normal [[
-  AssertEqual line('.'), 2
+  AssertEqual 2, line('.')
   normal [[
-  AssertEqual line('.'), 1
+  AssertEqual 1, line('.')

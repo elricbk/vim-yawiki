@@ -12,13 +12,13 @@ Execute (Set filetype):
   set filetype=yawiki
 
 Then (All lines have expected foldlevel):
-  AssertEqual foldlevel(1), 0
-  AssertEqual foldlevel(2), 0
-  AssertEqual foldlevel(3), 1
-  AssertEqual foldlevel(5), 2
-  AssertEqual foldlevel(6), 2
-  AssertEqual foldlevel(7), 1
-  AssertEqual foldlevel(8), 1
+  AssertEqual 0, foldlevel(1)
+  AssertEqual 0, foldlevel(2)
+  AssertEqual 1, foldlevel(3)
+  AssertEqual 2, foldlevel(5)
+  AssertEqual 2, foldlevel(6)
+  AssertEqual 1, foldlevel(7)
+  AssertEqual 1, foldlevel(8)
 
 Given (Spoiler outside of any section):
   <{ Something is hidden here
@@ -29,9 +29,9 @@ Execute (Set filetype):
   set filetype=yawiki
 
 Then (Spoiler have positive foldlevel):
-  AssertEqual foldlevel(1), 1
-  AssertEqual foldlevel(2), 1
-  AssertEqual foldlevel(3), 1
+  AssertEqual 1, foldlevel(1)
+  AssertEqual 1, foldlevel(2)
+  AssertEqual 1, foldlevel(3)
 
 Given (Spoiler inside section):
   == Spoiler section
@@ -42,4 +42,4 @@ Execute (Set filetype):
   set filetype=yawiki
 
 Then (Spoiler has greater foldlevel than section):
-  AssertEqual foldlevel(1) + 1, foldlevel(2)
+  AssertEqual foldlevel(2), foldlevel(1) + 1
