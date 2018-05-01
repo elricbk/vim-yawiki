@@ -180,6 +180,18 @@ Then (It has correct syntax):
   AssertEqual SyntaxOf('a'), 'yawikiLoginFirstLetter'
   AssertEqual SyntaxOf('bcd@'), 'yawikiLogin'
 
+Given (Simple login with dash):
+  test-login@
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (Whole login has expected syntax):
+  AssertEqual SyntaxOf('t'), 'yawikiLoginFirstLetter'
+  AssertEqual SyntaxOf('est-'), 'yawikiLogin'
+  AssertEqual SyntaxOf('l'), 'yawikiLogin'
+  AssertEqual SyntaxOf('ogin@'), 'yawikiLogin'
+
 Given (Twitter-style login):
   @abcd
 
@@ -189,6 +201,17 @@ Execute (Set filetype):
 Then (It has correct syntax):
   AssertEqual SyntaxOf('@'), 'yawikiLoginAt'
   AssertEqual SyntaxOf('abcd'), 'yawikiReversedLogin'
+
+Given (Twitter-style login with dash):
+  @test-login
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (Whole login has expected syntax):
+  AssertEqual SyntaxOf('@'), 'yawikiLoginAt'
+  AssertEqual SyntaxOf('test'), 'yawikiReversedLogin'
+  AssertEqual SyntaxOf('-login'), 'yawikiReversedLogin'
 
 Given (Login inflection):
   кто:abc
@@ -205,6 +228,18 @@ Then (It has correct syntax):
     AssertEqual SyntaxAt(i, len(getline(i)) - 1), 'yawikiInlineLogin'
     AssertEqual SyntaxOf(':\zs\w', i), 'yawikiLoginFirstLetter'
   endfor
+
+Given (Login inflection with dash):
+  кого:test-login
+
+Execute (Set filetype):
+  set filetype=yawiki
+
+Then (Whole login has expected syntax):
+    AssertEqual SyntaxAt(1), 'yawikiLoginInflection'
+    AssertEqual SyntaxAt(len(getline(1)) - 1), 'yawikiInlineLogin'
+    AssertEqual SyntaxOf(':\zst'), 'yawikiLoginFirstLetter'
+    AssertEqual SyntaxOf('-\zsl'), 'yawikiInlineLogin'
 
 Given (Quotes in different formats):
   <[

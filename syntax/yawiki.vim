@@ -50,16 +50,16 @@ syntax region yawikiGreenNote start="!!(\(green\|зел\|зеленый\))" end=
 syntax region yawikiGrayNote start="!!(\(gr[ea]y\|сер\))" end="!!" oneline
 
 " Yandex logins with first letter highlighted
-syntax match yawikiLoginFirstLetter /\<\w/ contained
-syntax match yawikiLogin /\w\+@/ contains=yawikiLoginFirstLetter
+syntax match yawikiLoginFirstLetter /\%(-\@1<!\&\<\)\w/ contained
+syntax match yawikiLogin /[-_0-9A-Za-z]\+@/ contains=yawikiLoginFirstLetter
 
-syntax match yawikiInlineLogin /\w\+/
+syntax match yawikiInlineLogin /[-_0-9A-Za-z]\+/
     \ contains=yawikiLoginFirstLetter contained
-syntax match yawikiLoginInflection /\v(кто|кого|кому|оком):\w+/
+syntax match yawikiLoginInflection /\v(кто|кого|кому|оком):[-_0-9A-Za-z]+/
     \ contains=yawikiInlineLogin
 
 syntax match yawikiLoginAt /@/ contained
-syntax match yawikiReversedLogin /@\w\+/ contains=yawikiLoginAt
+syntax match yawikiReversedLogin /@[-_0-9A-Za-z]\+/ contains=yawikiLoginAt
 
 " Quotation
 syntax region yawikiQuote start="<\[" end="]>"
