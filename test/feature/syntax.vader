@@ -320,6 +320,7 @@ Given (Different ticket numbers):
   notticket1
   NOTTICKET2-42
   NOTTICKET3 42
+  REVIEW:42
 
 Execute (Set filetype):
   set filetype=yawiki
@@ -329,6 +330,7 @@ Then (Correctly formatted ticket has ticket syntax):
   AssertEqual '', SyntaxOf('notticket1')
   AssertEqual '', SyntaxOf('NOTTICKET2')
   AssertEqual '', SyntaxOf('NOTTICKET3')
+  AssertEqual 'yawikiTicket', SyntaxOf('REVIEW')
 
 Given (HTML entities):
   &mdash;

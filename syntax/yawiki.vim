@@ -75,6 +75,7 @@ syntax match yawikiDefMarker /==/ contained
 syntax region yawikiDef matchgroup=yawikiDefMarker start="(?\ze[^)]" end="?)"
     \ contains=yawikiDefHead,yawikiDefMarker
 syntax match yawikiTicket /[A-Z]\+-\d\+/
+syntax match yawikiTicket /\<REVIEW:\d\+/
 syntax match yawikiHtmlEntity /&\w\+;/
 syntax match yawikiHtmlEntity /&#\d\+;/
 
