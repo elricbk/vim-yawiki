@@ -1,0 +1,8 @@
+Given (Some text with hyphen):
+  OLOLO-42
+
+Do (Change inside word):
+  ciwtest
+
+Expect (All text replaced):
+  test

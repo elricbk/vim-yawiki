@@ -3,3 +3,4 @@ Include (Autofolding support):       feature/folding.vader
 Include (Section movement):          feature/sections.vader
 Include (Formatting shortcuts):      feature/formatting.vader
 Include (Correct options handling):  feature/options.vader
+Include (`iskeyword` handling):      feature/iskeyword.vader
